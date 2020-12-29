@@ -15,13 +15,13 @@ public class unpack {
 			
 			String fileName = "890358105.robytes";
 //			ko text
-			File f = new File("C:\\Users\\Daniel\\eclipse-workspace\\unpack\\src\\unpack\\input files\\korean\\".concat(fileName));
+			File f = new File("C:\\Users\\Daniel\\eclipse-workspace\\unpack\\src\\unpack\\chinesepatch\\input files\\korean\\".concat(fileName));
 			byte[] bArr = Files.readAllBytes(f.toPath());
 			Database DatabaseUnpackKo = DatabaseUnpack(bArr);
 			LinkedHashMap<Long, String> rootMap = DatabaseToRoot(DatabaseUnpackKo.items);
 			
 //			ch text
-			File fCh = new File("C:\\Users\\Daniel\\eclipse-workspace\\unpack\\src\\unpack\\input files\\simp\\".concat(fileName));
+			File fCh = new File("C:\\Users\\Daniel\\eclipse-workspace\\unpack\\src\\unpack\\chinesepatch\\input files\\simp\\".concat(fileName));
 			byte[] bArrCh = Files.readAllBytes(fCh.toPath());
 			Database DatabaseUnpackCh = DatabaseUnpack(bArrCh);
 
@@ -54,13 +54,13 @@ public class unpack {
             }
             DatabasePatchItems(DatabaseUnpackKo, rootMap);
             byte[] DatabasePack = DatabasePack(DatabaseUnpackKo);
-            WriteFile("C:\\Users\\Daniel\\eclipse-workspace\\unpack\\src\\unpack\\output files\\".concat(fileName), DatabasePack);
+            WriteFile("C:\\Users\\Daniel\\eclipse-workspace\\unpack\\src\\unpack\\chinesepatch\\output files\\".concat(fileName), DatabasePack);
             
 
             byte[] ChecksumRead = ChecksumRead();
             Checksum ChecksumUnpack = ChecksumUnpack(ChecksumRead);
             ChecksumPatch(ChecksumUnpack, (long) DatabasePack.length, Hash.SHA1(DatabasePack), fileName);
-            WriteFile("C:\\Users\\Daniel\\eclipse-workspace\\unpack\\src\\unpack\\output files\\__file__list__", ChecksumPack(ChecksumUnpack));
+            WriteFile("C:\\Users\\Daniel\\eclipse-workspace\\unpack\\src\\unpack\\chinesepatch\\output files\\__file__list__", ChecksumPack(ChecksumUnpack));
             
 			System.out.println("Done");
 		}
@@ -165,7 +165,7 @@ public class unpack {
     }
     
     public static byte[] ChecksumRead() {
-    	String str = "C:\\Users\\Daniel\\eclipse-workspace\\unpack\\src\\unpack\\input files\\__file__list__";
+    	String str = "C:\\Users\\Daniel\\eclipse-workspace\\unpack\\src\\unpack\\chinesepatch\\input files\\__file__list__";
     	byte[] bArr = new byte[0];
         File file = new File(str);
         if (!file.exists()) {
